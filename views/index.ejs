@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Micro Blog</title>
+</head>
+
+<body>
+  <h1>My Micro Blog</h1>
+  <form method="post" action="/post/add">
+    <label for="name">What are you thinking about:</label>
+    <input type="text" name="name">
+    <input type="submit" value="Post">
+  </form>
+  <h4>Posts:</h4>
+  <ul>
+    <% items.forEach(function(item) { %>
+      <li>
+        <%= item.name %>
+        <form method="post" action="/post/delete">
+          <input type="hidden" name="item" value="<%= item._id %>"/>
+          <input type="submit" value="Delete Post"/>
+        </form>
+        <form method="post" action="/post/like">
+          <input type="hidden" name="item" value="<%= item._id %>"/>
+          <input type="submit" value="Like Post"/>
+        </form>
+        <form method="post" action="/post/edit">
+          <input type="hidden" name="item" value="<%= item._id %>"/>
+          <input type="text" name="name">
+          <input type="submit" value="Edit Post"/>
+        </form>
+        <label for="name">Liked: </label>
+        <%= item.likes %>
+      </li>
+      <% }); %>
+  </ul>
+
+</body>
+
+</html>
